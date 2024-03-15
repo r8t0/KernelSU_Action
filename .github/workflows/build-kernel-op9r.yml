@@ -168,6 +168,8 @@ jobs:
       run: |
         which as
         file $(which as)
+        which ld.lld
+        file $(which ld.lld)
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin:$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin:$PATH
         export KBUILD_BUILD_HOST=Github-Action
         export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
@@ -180,6 +182,9 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/gcc-32/
         ls -1p .| sed "s@^@$(pwd)/@"
         file ./bin/*as
+        echo "find ld.lld"
+        which ld.lld
+        file $(which ld.lld)
         exit 0
 
     - name: Download mkbootimg tools
