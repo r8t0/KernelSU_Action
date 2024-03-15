@@ -58,6 +58,11 @@ jobs:
         mkdir clang
         aria2c -j10 ${{ github.event.inputs.CLANG_URL }} -o clang.tar.gz
         tar -C clang/ -zxf clang.tar.gz
+        ls -alhF clang
+        ls -alhF clang/bin/
+        file clang/bin/as
+        fild . -type f -name "aarch64-linux-android-as"
+        exit(0)
         git clone --depth=1 ${{ github.event.inputs.KERNEL_SOURCE }} -b ${{ github.event.inputs.KERNEL_SOURCE_BRANCH }} android-kernel
         cd android-kernel
         ${{ github.event.inputs.shell }}
