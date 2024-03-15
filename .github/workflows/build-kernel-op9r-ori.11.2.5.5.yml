@@ -22,7 +22,7 @@ on:
       CLANG_URL:
         description: 'Clang URL'
         required: true
-        default: 'https://github.com/ZyCromerZ/Clang/releases/download/17.0.0-20230725-release/Clang-17.0.0-20230725.tar.gz'      
+        default: 'https://github.com/ZyCromerZ/Clang/releases/download/14.0.6-20230213-release/Clang-14.0.6-20230213.tar.gz'
 
       shell:
         description: 'shell'
@@ -137,7 +137,6 @@ jobs:
         tar -zcvf boot-op9r-11.2.5.5-${{ env.BUILD_TIME }}.tgz 666/*
 
     - name: Upload boot image
-      if: env.MAKE_BOOT_IMAGE_IS_OK == 'true'
       uses: actions/upload-artifact@v4
       with:
         name: boot-${{ env.BUILD_TIME }}
