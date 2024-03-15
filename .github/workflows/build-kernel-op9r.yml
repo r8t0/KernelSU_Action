@@ -90,6 +90,22 @@ jobs:
         wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/${{ env.CLANG_BRANCH }}/clang-${{ env.CLANG_VERSION }}.tar.gz
         tar -C clang-aosp/ -zxvf clang-${{ env.CLANG_VERSION }}.tar.gz
 
+    - name: Check clang as version
+      run: |
+        which as
+        file $(which as)
+        export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
+        export KBUILD_BUILD_HOST=Github-Action
+        export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
+        which as
+        file $(which as)
+        ls $GITHUB_WORKSPACE/kernel_workspace/clang-aosp/
+        ls $GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin/
+        ls $GITHUB_WORKSPACE/kernel_workspace/clang-aosp/*/bin/
+        file $GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin/as
+        file $GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin/as
+        exit 0
+
     - name: Download Custom-Clang
       if: env.USE_CUSTOM_CLANG == 'true'
       run: |
