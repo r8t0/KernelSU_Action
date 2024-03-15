@@ -80,7 +80,11 @@ jobs:
         export SUBARCH=arm64
         export KBUILD_COMPILER_STRING="$(clang --version | head -n 1 )"
         export KBUILD_BUILD_HOST=zhlhlf_linux
-        export KBUILD_BUILD_USER=zhlhlf  
+        export KBUILD_BUILD_USER=zhlhlf
+
+        which as
+        file $(which as)
+        echo "find new as"
         
         cat > AnyKernel3.sh <<end
         rm -rf AnyKernel3
