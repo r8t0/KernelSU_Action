@@ -61,7 +61,6 @@ jobs:
         ls -alhF clang
         ls -alhF clang/bin/
         file clang/bin/as
-        find / -type f -name "*android-as*"
         git clone --depth=1 ${{ github.event.inputs.KERNEL_SOURCE }} -b ${{ github.event.inputs.KERNEL_SOURCE_BRANCH }} android-kernel
         cd android-kernel
         ${{ github.event.inputs.shell }}
