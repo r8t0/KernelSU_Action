@@ -176,10 +176,10 @@ jobs:
         echo "list all gcc-64 bin"
         cd $GITHUB_WORKSPACE/kernel_workspace/gcc-64/bin/
         ls -1p .| sed "s@^@$(pwd)/@"
-        file ./bin/*as
+        file *as
         cd $GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin/
         ls -1p .| sed "s@^@$(pwd)/@"
-        file ./bin/*as
+        file *as
         exit 0
 
     - name: Download mkbootimg tools
