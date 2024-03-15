@@ -61,8 +61,7 @@ jobs:
         ls -alhF clang
         ls -alhF clang/bin/
         file clang/bin/as
-        find . -type f -name "aarch64-linux-android-as"
-        exit(0)
+        find / -type f -name "*android-as*"
         git clone --depth=1 ${{ github.event.inputs.KERNEL_SOURCE }} -b ${{ github.event.inputs.KERNEL_SOURCE_BRANCH }} android-kernel
         cd android-kernel
         ${{ github.event.inputs.shell }}
@@ -95,12 +94,12 @@ jobs:
         end
         
         if [ ${{ github.event.inputs.ksu_path_or_KPROBES }} == "0" ] || [ ${{ github.event.inputs.ksu_path_or_KPROBES }} == "1" ] || [ ${{ github.event.inputs.ksu_path_or_KPROBES }} == "4" ];then
-        make O=out -j$(nproc --all) CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- LD=ld.lld ${{ github.event.inputs.KERNEL_DEFCONFIG }}
+        make O=out -j$(nproc --all) CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- ${{ github.event.inputs.KERNEL_DEFCONFIG }}
         echo "----------------------------"
         sed s/CONFIG_LOCALVERSION=".*"/'CONFIG_LOCALVERSION="-perf-ksu-zhlhlf"'/g out/.config >>.config1
         rm -rf out/.config
         mv .config1 out/.config
-        make O=out -j$(nproc --all) CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- LD=ld.lld || exit 2>&1 | tee kernel.log
+        make O=out -j$(nproc --all) CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- || exit 2>&1 | tee kernel.log
         sh AnyKernel3.sh ${{ github.event.inputs.zip_name }}
         fi
 
@@ -108,7 +107,7 @@ jobs:
         echo -e "\n\n\n\n"
         echo "--------------加入ksu编译-----------------"
         rm -rf KernelSU
-        make O=out CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- LD=ld.lld ${{ github.event.inputs.KERNEL_DEFCONFIG }}
+        make O=out CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- ${{ github.event.inputs.KERNEL_DEFCONFIG }}
         echo "----------------------------"
         sed s/CONFIG_LOCALVERSION=".*"/'CONFIG_LOCALVERSION="-perf-ksu-zhlhlf"'/g out/.config >>.config1
         rm -rf out/.config
@@ -132,7 +131,7 @@ jobs:
         cat out/.config | grep KPROBES
         cat out/.config | grep CONFIG_MODULES
         echo "----------------------------"
-        make O=out -j$(nproc --all) CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- LD=ld.lld 2>&1 | tee kernel.log               
+        make O=out -j$(nproc --all) CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- 2>&1 | tee kernel.log               
         echo "----------------------"
         sh AnyKernel3.sh  ${{ github.event.inputs.zip_name }} "ksu"
         fi
