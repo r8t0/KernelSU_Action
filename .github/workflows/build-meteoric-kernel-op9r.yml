@@ -7,12 +7,12 @@ on:
       KERNEL_SOURCE:
         description: 'Kernel Source'
         required: true
-        default: 'https://github.com/zhlhlf/meteoric_kernel'
+        default: 'https://github.com/Project-Zephyrus/meteoric_kernel'
         
       KERNEL_SOURCE_BRANCH:
         description: 'Branch'
         required: true
-        default: 'meteoric-sc '
+        default: 'meteoric-sc'
         
       KERNEL_DEFCONFIG:
         description: 'Defconfig'
