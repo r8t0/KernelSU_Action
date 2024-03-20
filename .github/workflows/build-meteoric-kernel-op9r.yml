@@ -121,6 +121,9 @@ jobs:
         make O=out -j$(nproc --all) CC="ccache clang" CXX="ccache clang++" ARCH=arm64 CROSS_COMPILE=$CLANG_PATH/bin/aarch64-linux-gnu- CROSS_COMPILE_ARM32=$CLANG_PATH/bin/arm-linux-gnueabi- LD=ld.lld 2>&1 | tee kernel.log               
         echo "----------------------"
         sh AnyKernel3.sh "KernelSU"
+        pwd
+        ls -alhF .
+        du -hd 3 ../
 
     - name: Upload boot image
       uses: actions/upload-artifact@v4
