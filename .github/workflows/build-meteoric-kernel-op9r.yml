@@ -129,10 +129,10 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: build-op8r-meteoric-kernelsu
-        path: ../666/*
+        path: /home/runner/work/KernelSU_Action/KernelSU_Action/666/*
 
     - name: Upload boot image1
       uses: actions/upload-artifact@v4
       with:
         name: build-op8r-meteoric-kernelsu-out-dir
-        path: out/arch/arm64/boot/
+        path: /home/runner/work/KernelSU_Action/KernelSU_Action/android-kernel/out/arch/arm64/boot/*
