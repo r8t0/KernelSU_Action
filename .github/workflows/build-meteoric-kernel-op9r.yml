@@ -1,4 +1,4 @@
-name: make kernel
+name: make kernel meteoric op9r
 
 on:
   workflow_dispatch:
